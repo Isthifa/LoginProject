@@ -30,4 +30,5 @@ public class UserController {
     else
         return ResponseEntity.ok(userService.loginUser(loginRequest));
     }
+
 }
