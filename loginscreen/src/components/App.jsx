@@ -4,6 +4,7 @@ import Registration from './Registartion';
 import Homepage from './Homepage';
 import {BrowserRouter as Router,Route,Routes} from "react-router-dom";
 import Foot from '../components/Foot';
+import { ToastContainer } from 'react-toastify';
 
 export default function App() {
     return (
@@ -16,6 +17,7 @@ export default function App() {
                     <Route exact path="/registration" element={<Registration/>} />
                 </Routes>
                 </div>
+                <ToastContainer position="top-right"/>
                 <Foot/>
             </Router>
         </div>
