@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import {AiFillEyeInvisible,AiFillEye} from "react-icons/ai";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
-
+import {useNavigate} from "react-router-dom";
 
 
 
@@ -20,6 +20,7 @@ export default function Login() {
         setLogindate({...logindata,[e.target.name]:e.target.value});
         
     }
+    const navigate=useNavigate();
     const {email,password}=logindata;
 
     const handleSubmit = async(e) => {
@@ -30,6 +31,9 @@ export default function Login() {
         await axios.post("http://localhost:8080/api/login", formdata).then((res) => {
             console.log(res);
             res.status === 200 && toast.success("User Logged In Successfully");
+            if(res.status===200){
+                navigate("/dashboard");
+            }
             setLogindate(formdata);
         }).catch((error) => {
             console.log(error);

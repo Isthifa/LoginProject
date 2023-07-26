@@ -37,13 +37,18 @@ export default function Registration() {
         console.log(user);
         await axios.post("http://localhost:8080/api/register", user).then((res) => {
             res.status === 200 && toast.success("User Registered Successfully");
-            console.log(res.data);
+            // console.log(res.data);
+            // console.log(res.data.response.data);
             setUserdata(res.data);
         }).catch((error) => {
             console.log(error);
-            if (error.response && error.response.data) {
-                toast.error(error.response.data.error);
-              } else {
+            console.log(error.response.data.username);
+            if (error.response.status === 400) {
+              toast.error(error.response.data.message);
+              } else if(error.response.status === 500){
+                toast.error(error.response.data[0]);
+              } 
+              else {
                 toast.error("An unexpected error occurred");
               }
         });
